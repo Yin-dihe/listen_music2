@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <title>创作中心</title>
+</head>
+<body>
+    <!-- 理论上这个页面，需要登录后才能看到并使用，但现在我们就暂时不管了。用户有没有登录的验证，放在 upload.do 去进行 -->
+    <form method="post" action="/studio/track/upload.do" enctype="multipart/form-data">
+        <input type="text" name="title">
+        <input type="file" name="track">
+        <button>上传</button>
+    </form>
+</body>
+</html>

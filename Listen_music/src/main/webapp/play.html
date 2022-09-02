@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+  <meta charset="UTF-8">
+  <title>比特听书</title>
+  <link rel="stylesheet" href="./css/player.css">
+</head>
+<body>
+  <div class="studio-entry">
+    <a href="/">比特听书</a>
+    <a href="/studio/">创作中心</a>
+  </div>
+  <div class="player">
+    <div class="wrapper">
+      <div class="img-area">
+        <img class="cover">
+      </div>
+      <div class="song-details">
+        <p class="name">加载中 ...</p>
+        <p class="artist">加载中 ...</p>
+      </div>
+      <div class="progress-area">
+        <div class="progress-bar"></div>
+        <div class="timer">
+          <span class="current">0:00</span>
+          <span class="duration">0:00</span>
+        </div>
+        <audio id="main-audio"></audio>
+      </div>
+      <div class="controls">
+        <i id="prev" class="fas fa-backward"></i>
+        <div class="play-pause">
+          <i class="fas fa-play"></i>
+        </div>
+        <i id="next" class="fas fa-forward"></i>
+      </div>
+    </div>
+  </div>
+  <script src="./js/param.js"></script>
+  <script src="./js/player.js"></script>
+</body>
+</html>

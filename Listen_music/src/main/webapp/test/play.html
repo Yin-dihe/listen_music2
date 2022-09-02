@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <title>播放音乐</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <audio src="./歌唱祖国.mp3"></audio>
+    <button class="playPause">播放</button>
+    <button class="prev">上一首</button>
+    <button class="next">下一首</button>
+    <div>当前时间: <span class="currentTime"></span></div>
+    <div>总时间: <span class="duration"></span></div>
+    <div>
+        <input type="text" id="progress"><button class="jumpTo">跳到此处</button>
+    </div>
+    <button class="volumeUp">声音增加</button>
+    <button class="volumeDown">声音减少</button>
+
+    <script>
+        var mp3 = ['歌唱祖国', '千千阙歌', '大海']
+        var currentIndex = 0
+        var playing = false
+
+        var oAudio = document.querySelector('audio')
+        document.querySelector('.playPause').onclick = function() {
+            if (playing) {
+                oAudio.pause()
+                this.textContent = '播放'
+            } else {
+                oAudio.play()
+                this.textContent = '暂停'
+            }
+
+            playing = !playing
+        }
+
+        document.querySelector('.prev').onclick = function() {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = 2;
+            }
+            var name = "./" + mp3[currentIndex] + ".mp3";
+            oAudio.src = name
+        }
+
+
+        document.querySelector('.next').onclick = function() {
+            currentIndex++;
+            if (currentIndex > 2) {
+                currentIndex = 0;
+            }
+            var name = "./" + mp3[currentIndex] + ".mp3";
+            oAudio.src = name
+        }
+
+        oAudio.ontimeupdate = function() {
+            var ct = oAudio.currentTime
+            var ctm = Math.floor(ct / 60)
+            var cts = Math.floor(ct % 60)
+            document.querySelector('.currentTime').textContent = ctm + ":" + cts
+
+
+            var dt = oAudio.duration
+            var dtm = Math.floor(dt / 60)
+            var dts = Math.floor(dt % 60)
+            document.querySelector('.duration').textContent = dtm + ":" + dts
+        }
+
+        document.querySelector('.jumpTo').onclick = function() {
+            var p = parseInt(document.querySelector('#progress').value)
+            if (p < 0) { p = 0 }
+            if (p > 100) { p = 100 }
+
+            var ct = p / 100 * oAudio.duration;
+            oAudio.currentTime = ct
+
+            document.querySelector('#progress').value = ''
+        }
+
+        document.querySelector('.volumeUp').onclick = function() {
+            var volume = oAudio.volume;
+            volume += 0.1
+            if (volume > 1) {
+                volume = 1
+            }
+            oAudio.volume = volume
+        }
+
+        document.querySelector('.volumeDown').onclick = function() {
+            var volume = oAudio.volume;
+            volume -= 0.1
+            if (volume < 0) {
+                volume = 0
+            }
+            oAudio.volume = volume
+        }
+    </script>
+</body>
+</html>
